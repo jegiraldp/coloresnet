@@ -9,13 +9,16 @@
 <script src="/js/brain-browser.min.js"></script>
   </head>
   <body>
+    Sin Red:
+    <input data-jscolor="{onInput:'updateSin(this)', alpha:1.0}" id="colorInput">
+    <div id="outSin"></div>
+    <hr>
+    Con red:
       <input data-jscolor="{onInput:'update(this)', alpha:1.0}" id="colorInput">
-      <hr>
       <div id="out"></div>
-
+      <hr>
 
       <script type="text/javascript">
-
         //red
         var net = new brain.NeuralNetwork();
         net.train([
@@ -48,7 +51,17 @@
             }else{
               document.body.style.color="black";
             }
+        }//
+
+        function updateSin(color){
+          var R=color.channel('R')/255;
+          var G=color.channel('G')/255;
+          var B=color.channel('B')/255;
+          var elDiv= document.getElementById("outSin");
+          elDiv.innerHTML="R: "+R+"<br>G: "+G+"<br>B: "+B
+          document.body.style.backgroundColor=color;
         }
       </script>
+
     </body>
 </html>
